@@ -1,3 +1,5 @@
+import pytest
+
 from twitter import Twitter
 
 
@@ -12,5 +14,7 @@ def test_tweet_single_message():
 
 def test_tweet_long_message():
     twitter = Twitter()
-    twitter.tweet('test'*41)
-    assert twitter.tweets == ['test'*41]
+    with pytest.raises(Exception):
+        twitter.tweet('test'*41)
+    assert twitter.tweets == []
+
