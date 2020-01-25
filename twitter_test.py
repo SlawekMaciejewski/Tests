@@ -7,28 +7,26 @@ def test_twitter_initialization():
     twitter = Twitter()
     assert twitter
 
+
 def test_tweet_single_message():
     twitter = Twitter()
     twitter.tweet('Test message')
     assert twitter.tweets == ['Test message']
 
+
 def test_tweet_long_message():
     twitter = Twitter()
     with pytest.raises(Exception):
-        twitter.tweet('test'*41)
+        twitter.tweet('test' * 41)
     assert twitter.tweets == []
 
-def test_tweet_with_hashtag():
-    twitter = Twitter()
-    massage = 'Test #first massage'
-    twitter.tweet(massage)
-    print(twitter.tweets)
-    assert 'first' in twitter.find_hashtags(twitter.tweets[0])
 
-def test_tweet_with_hashtag_on_beginning():
+@pytest.mark.parametrize('massage, hashtag', (
+        ('Test #first massage', 'first'),
+        ('#first test massage', 'first'),
+        ('#FIRST test massage', 'FIRST'),
+        ('Test massage #first', 'first'),
+))
+def test_tweet_with_hashtag(massage, hashtag):
     twitter = Twitter()
-    massage = '#first test massage'
-    twitter.tweet(massage)
-    print(twitter.tweets)
-    assert 'first' in twitter.find_hashtags(twitter.tweets[0])
-
+    assert hashtag in twitter.find_hashtags(massage)
