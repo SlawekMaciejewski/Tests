@@ -24,7 +24,7 @@ def test_tweet_long_message():
 @pytest.mark.parametrize('massage, expected', (
         ('Test #first massage', ['first']),
         ('#first test massage', ['first']),
-        ('#FIRST test massage', ['FIRST']),
+        ('#FIRST test massage', ['first']),
         ('Test massage #first', ['first']),
         ('Test message with #first and #second hashtags', ['first', 'second'])
 ))
