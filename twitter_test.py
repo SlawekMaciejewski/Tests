@@ -4,10 +4,16 @@ from twitter import Twitter
 
 
 @pytest.fixture()
-def twitter():
+def twitter(request):
+    # print(request.module)
     twitter = Twitter()
-    yield twitter
-    twitter.delete()
+
+    def fin():
+        twitter.delete()
+
+    request.addfinalizer(fin)
+    return twitter
+
 
 
 def test_twitter_initialization(twitter):
