@@ -2,6 +2,7 @@ import pytest
 
 from twitter import Twitter
 
+
 @pytest.fixture
 def backend(tmpdir):
     temp_file = tmpdir.join('test.txt')
@@ -34,15 +35,15 @@ def test_tweet_long_message(twitter):
 
 
 def test_initialize_two_twitter_calsses(backend):
-    #When
+    # When
     twitter1 = Twitter(backend=backend)
     twitter2 = Twitter(backend=backend)
 
-    #Given
+    # Given
     twitter1.tweet('Test 1')
     twitter1.tweet('Test 2')
 
-    #Then
+    # Then
     assert twitter2.tweets == ['Test 1', 'Test 2']
 
 
