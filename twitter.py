@@ -8,9 +8,9 @@ class Twitter(object):
     def __init__(self, backend=None):
         self.backend = backend
         self._tweets = []
-        if self.backend and not os.path.exists(self.backend):
-            with open(self.backend, 'w'):
-                pass
+        # if self.backend and not os.path.exists(self.backend):
+        #     with open(self.backend, 'w'):
+        #         pass
 
     @property
     def tweets(self):
